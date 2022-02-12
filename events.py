@@ -1,7 +1,6 @@
 import asyncio
 
 import discord
-import spoken_lines as lines
 import actions as action
 
 TIMEOUT_TIME = 7200  # 2 hours
@@ -35,7 +34,7 @@ class Events:
                     await start(message)
 
         async def start(message: discord.message) -> None:
-            self.previous_message = await action.greeting(message)
+            self.previous_message = await action.greeting(message, message.author.id)
             self.started = True
             self.channel = message.channel
             self.game_master = message.author
@@ -77,7 +76,7 @@ class Events:
                 await finish()
             elif emoji == "🍻":
                 self.queue_number += 1
-                await action.print_queue_taken(message)
+                await action.print_queue_taken(message, self.queue_number-1)
                 await start_new_queue(wait=True)
 
 

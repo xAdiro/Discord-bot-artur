@@ -2,8 +2,8 @@ from datetime import date
 import time
 
 
-GREETING = """```
-No i to mi się podoba. Pijemy nie śpimy, polewaj i pijemy co 15 minutek co by to nikt z krzesła nie spadł.
+GREETING = """<@{0}>```
+Czy ktoś coś mówił o piciu? Polewaj ale pijemy co 15 minut co by to nikt z krzesła nie spadł.
 
 
 Jak bedziesz gotowy to zareaguj
@@ -20,6 +20,10 @@ FAREWELL = """```
 Kolejek: {1}
 ```""".format(str(date.today()) + time.strftime(" %H:%M"), "{0}")  # {0} to format in function
 
+FAREWELL_NO_QUEUES = """```
+👋 Dzisiaj nie pije w takim razie
+```"""
+
 TIMEOUT = """```
 Trochę czasu upłynęło, napisz jak się namyślisz
 ```"""
@@ -34,5 +38,5 @@ Zareaguj jak wypijesz
 ```"""
 
 TAKEN = """```
-Shot wypity
+{0} shot wypity
 ```"""

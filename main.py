@@ -6,7 +6,7 @@ import events as ev
 def main():
     client = discord.Client()
 
-    events = ev.Events(client)
+    ev.Events(client)
     client.run(TOKEN)
 
 

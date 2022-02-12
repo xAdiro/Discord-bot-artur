@@ -1,12 +1,12 @@
-import asyncio
-
 import spoken_lines as lines
-import asyncio
 import discord
 
 
 async def finish(channel: discord.channel, queues_total: int) -> None:
-    await channel.send(lines.FAREWELL.format(queues_total-1))
+    if queues_total == 0:
+        await channel.send(lines.FAREWELL_NO_QUEUES)
+    else:
+        await channel.send(lines.FAREWELL.format(queues_total-1))
 
 
 async def tell_already_started(message: discord.message) -> discord.message:
@@ -15,9 +15,9 @@ async def tell_already_started(message: discord.message) -> discord.message:
     return my_message
 
 
-async def greeting(message: discord.message) -> discord.message:
+async def greeting(message: discord.message, tag_name: str) -> discord.message:
     await message.add_reaction('👌')
-    my_message = await message.channel.send(lines.GREETING)
+    my_message = await message.channel.send(lines.GREETING.format(tag_name))
     await my_message.add_reaction('✅')
     await my_message.add_reaction('❌')
     return my_message
@@ -30,5 +30,5 @@ async def new_queue(channel: discord.channel, queue_number: int, tag_name: str) 
     return my_message
 
 
-async def print_queue_taken(message: discord.message):
-    await message.edit(content=lines.TAKEN)
+async def print_queue_taken(message: discord.message, queue_number: int):
+    await message.edit(content=lines.TAKEN.format(queue_number))
