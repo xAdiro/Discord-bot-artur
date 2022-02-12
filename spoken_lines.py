@@ -4,7 +4,7 @@ import time
 
 
 GREETING = """<@{0}>```
-Czy ktoś coś mówił o piciu? Polewaj ale pijemy co 15 minut co by to nikt z krzesła nie spadł.
+Czy ktoś coś mówił o piciu? Polewaj ale pijemy co 15 minut coby to nikt z krzesła nie spadł.
 
 
 Jak bedziesz gotowy to zareaguj
