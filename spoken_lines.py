@@ -1,3 +1,4 @@
+import datetime
 from datetime import date
 import time
 
@@ -38,5 +39,5 @@ Zareaguj jak wypijesz
 ```"""
 
 TAKEN = """```
-{0} shot wypity
-```"""
+{0} shot wypity. Kolejny o {1}
+```""".format("{0}", (datetime.datetime.now() + datetime.timedelta(minutes=15)).strftime("%H:%M:%S"))
