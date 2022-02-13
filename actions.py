@@ -1,12 +1,13 @@
 import spoken_lines as lines
 import discord
+import custom_time as time
 
 
-async def finish(channel: discord.channel, queues_total: int) -> None:
-    if queues_total == 0:
+async def farewell(channel: discord.channel, queues_total: int) -> None:
+    if queues_total-1 == 0:
         await channel.send(lines.FAREWELL_NO_QUEUES)
     else:
-        await channel.send(lines.FAREWELL.format(queues_total-1))
+        await channel.send(lines.FAREWELL.format(time.full(), queues_total-1))
 
 
 async def tell_already_started(message: discord.message) -> discord.message:

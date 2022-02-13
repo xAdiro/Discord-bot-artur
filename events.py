@@ -51,7 +51,7 @@ class Events:
 
         async def finish():
             await delete_previous_message()
-            await action.finish(self.channel, self.queue_number)
+            await action.farewell(self.channel, self.queue_number)
             self.queue_number = 1
             self.started = False
 
@@ -65,7 +65,6 @@ class Events:
             try:
                 reaction, user = await self.client.wait_for("reaction_add", check=check, timeout=TIMEOUT_TIME)  # 2 hours
             except asyncio.TimeoutError:
-                # await message.channel.send(lines.TIMEOUT)
                 await finish()
                 return ""
 
