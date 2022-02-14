@@ -1,15 +1,15 @@
-import datetime
-from datetime import date
-import time
+import events.timings as frequency
 
-
-GREETING = """<@{0}>```
-Czy ktoś coś mówił o piciu? Polewaj ale pijemy co 15 minut coby to nikt z krzesła nie spadł.
+GREETING = """
+<@{user_id}>```
+Czy ktoś coś mówił o piciu? Polewaj ale pijemy co {queue_frequency_minutes} minut coby to nikt z krzesła nie spadł.
 
 
 Jak bedziesz gotowy to zareaguj
 👇
-```"""
+```""".format(
+    queue_frequency_minutes=frequency.Queue().minutes,
+    user_id="{user_id}")  # python XD
 
 ALREADY_STARTED = """```
 Picie się już zaczęło
@@ -17,10 +17,10 @@ Picie się już zaczęło
 
 FAREWELL = """```
 👋 Kończymy na dzisiaj.
-Od: {0} 
-Do: {1}      
-Kolejek: {2}
-```""".format(str(date.today()) + time.strftime(" %H:%M"), "{0}", "{1}")  # {0}, {1} to format in function
+Od: {beginning_time} 
+Do: {finishing_time}      
+Kolejek: {queues_total}
+```"""
 
 FAREWELL_NO_QUEUES = """```
 👋 Dzisiaj nie pijemy w takim razie
@@ -31,14 +31,17 @@ Trochę czasu upłynęło, napisz jak się namyślisz
 ```"""
 
 QUEUE = """
-<@{1}>
+<@{user_id}>
 ```
-Zaczynamy {0} kolejkę. Następna będzie za 15 min.
+Zaczynamy {started_queue_number} kolejkę. Następna będzie za {queue_frequency_minutes} min.
 
 Zareaguj jak wypijesz
 👇
-```"""
+```""".format(
+    queue_frequency_minutes=frequency.Queue().minutes,
+    user_id="{user_id}",
+    started_queue_number="{started_queue_number}")
 
 TAKEN = """```
-{0} shot wypity. Kolejny o {1}
-```""".format("{0}", (datetime.datetime.now() + datetime.timedelta(minutes=15)).strftime("%H:%M:%S"))
+{queue_taken} shot wypity. Kolejny o {time}
+```"""

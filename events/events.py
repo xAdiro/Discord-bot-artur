@@ -1,14 +1,13 @@
 import asyncio
-
 import discord
-import actions as action
-
-TIMEOUT_TIME = 7200  # 2 hours
-QUEUE_TIME = 900  # 15 minutes
+import speaking as speak
+import custom_time as time
+import events.timings as frequency
 
 
 class Events:
     started = False
+    time_started = ""
     client = discord.client
     game_master = None
     channel = None
@@ -29,29 +28,31 @@ class Events:
 
             if message.content.lower().startswith('pijemy'):
                 if self.started:
-                    await action.tell_already_started(message)
+                    await speak.already_started(message)
                 else:
                     await start(message)
 
         async def start(message: discord.message) -> None:
-            self.previous_message = await action.greeting(message, message.author.id)
+            self.previous_message = await speak.greeting(message, message.author.id)
             self.started = True
             self.channel = message.channel
             self.game_master = message.author
+            self.time_started = time.full()
+
             await wait_for_reaction(message)
 
         async def start_new_queue(wait=False):
             if wait:
-                await asyncio.sleep(QUEUE_TIME)  # 15 minutes
+                await asyncio.sleep(frequency.Queue().seconds)  # 15 minutes
 
             await delete_previous_message()
-            my_message = await action.new_queue(self.channel, self.queue_number, self.game_master.id)
+            my_message = await speak.new_queue(self.channel, self.queue_number, self.game_master.id)
             self.previous_message = my_message
             await wait_for_reaction(my_message)
 
         async def finish():
             await delete_previous_message()
-            await action.farewell(self.channel, self.queue_number)
+            await speak.farewell(self.channel, self.queue_number, self.time_started)
             self.queue_number = 1
             self.started = False
 
@@ -63,7 +64,7 @@ class Events:
                 return user == self.game_master and str(reaction.emoji) in "✅🍻❌"
 
             try:
-                reaction, user = await self.client.wait_for("reaction_add", check=check, timeout=TIMEOUT_TIME)  # 2 hours
+                reaction, user = await self.client.wait_for("reaction_add", check=check, timeout=frequency.Timeout().seconds)  # 2 hours
             except asyncio.TimeoutError:
                 await finish()
                 return ""
@@ -75,7 +76,7 @@ class Events:
                 await finish()
             elif emoji == "🍻":
                 self.queue_number += 1
-                await action.print_queue_taken(message, self.queue_number-1)
+                await speak.print_queue_taken(message, self.queue_number - 1)
                 await start_new_queue(wait=True)
 
 

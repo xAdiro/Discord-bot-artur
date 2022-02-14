@@ -1,6 +1,6 @@
 import discord
 from password import TOKEN
-import events as ev
+import events.events as ev
 
 
 def main():
