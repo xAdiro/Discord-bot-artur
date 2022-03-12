@@ -32,6 +32,12 @@ class Events:
                 print("Dodano kolejke aktualna kolejka " + str(self.queue_number))
                 return
 
+            if message.content.lower().startswith('$czas_kolejki(') and message.author == self.game_master:
+                new_time = int(message.content.lower().replace('$czas_kolejki(', '').replace(')', ''))
+                frequency.QUEUE_TIME_SECONDS = new_time
+                print(f"Ustawiono czas kolejki na: {new_time} sekund")
+                return
+
             if message.content.lower().startswith('pijemy'):
                 if self.started:
                     await speak.already_started(message)
