@@ -21,7 +21,10 @@ class Timeout(object):
 
 
 class Queue(object):
-    __QUEUE_TIME_SECONDS = 5  # 15 minutes = 900 seconds
+    __QUEUE_TIME_SECONDS = 900  # 15 minutes = 900 seconds
+
+    def __init__(self, time_seconds=5):
+        self.__QUEUE_TIME_SECONDS = time_seconds
 
     @property
     def miliseconds(self) -> int:
