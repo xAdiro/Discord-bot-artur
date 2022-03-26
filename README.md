@@ -6,10 +6,16 @@ Artur is a discord party bot which task is to notify everyone regularly when the
 - Discord.py API
 
 ## Setting up
+Firstly you need to [create your bot](https://docs.discord.red/en/stable/bot_application_guide.html) and [invite it to the server](https://docs.discordbotstudio.org/setting-up-dbs/inviting-a-bot-to-your-server)
+
 In order for script to work you have to provide acces token to your bot account. You should put `password.py` in main folder and create string constant TOKEN containing your acces token like so:
 
 ###### /password.py: 
 ```python
 TOKEN = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' 
+```
+Also you need to install discord api with:
+```bash
+pip install discord
 ```
 After that you should be able to run 'main.py' succesfully.
