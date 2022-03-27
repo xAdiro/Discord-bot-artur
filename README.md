@@ -18,4 +18,4 @@ Also you need to install discord api with:
 ```bash
 pip install discord
 ```
-After that you should be able to run 'main.py' succesfully.
+After that you should be able to run `main.py` succesfully.
