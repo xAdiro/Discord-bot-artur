@@ -23,7 +23,7 @@ class Timeout(object):
 
 class Queue(object):
     def __init__(self, time_seconds=5):
-       #QUEUE_TIME_SECONDS = time_seconds
+        #  QUEUE_TIME_SECONDS = time_seconds
         pass
 
     @property

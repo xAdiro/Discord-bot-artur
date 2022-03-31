@@ -8,6 +8,7 @@ class Command:
     def __init__(self, message: discord_message):
         self.__content = message.content.lower()
         self.value = self.__get_value(self.__content)
+        self.cmd_type = None
 
         if self.__content.startswith('$dodaj('):
             self.cmd_type = Commands.ADD_QUEUE
@@ -17,10 +18,12 @@ class Command:
 
         if self.__content.startswith('pijemy'):
             self.cmd_type = Commands.START
-            self.value = None
 
-    def __get_value(message: str) -> float:
-        new_time = int(message.replace('$czas_kolejki(', '').replace(')', ''))
+    def __get_value(self, message: str) -> float:
+        try:
+            new_time = int(message.replace('$czas_kolejki(', '').replace(')', ''))
+        except Exception:
+            new_time = None
         return new_time
 
 

@@ -9,7 +9,7 @@ Jak bedziesz gotowy to zareaguj
 👇
 ```""".format(
     queue_frequency_minutes=frequency.Queue().minutes,
-    user_id="{user_id}")  # python XD
+    user_id="{user_id}")
 
 ALREADY_STARTED = """```
 Picie się już zaczęło
@@ -17,8 +17,8 @@ Picie się już zaczęło
 
 FAREWELL = """```
 👋 Kończymy na dzisiaj.
-Od: {beginning_time} 
-Do: {finishing_time}      
+Od: {beginning_time}
+Do: {finishing_time}
 Kolejek: {queues_total}
 ```"""
 
@@ -37,10 +37,7 @@ Zaczynamy {started_queue_number} kolejkę. Następna będzie za {queue_frequency
 
 Zareaguj jak wypijesz
 👇
-```""".format(
-    queue_frequency_minutes=frequency.Queue().minutes,
-    user_id="{user_id}",
-    started_queue_number="{started_queue_number}")
+```"""
 
 TAKEN = """```
 {queue_taken} shot wypity. Kolejny o {time}

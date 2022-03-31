@@ -30,7 +30,10 @@ async def greeting(message: discord.message, tag_name: str) -> discord.message:
 
 
 async def new_queue(channel: discord.channel, queue_number: int, tag_name: str) -> discord.message:
-    my_message = await channel.send(lines.QUEUE.format(user_id=tag_name, started_queue_number=queue_number))
+    my_message = await channel.send(lines.QUEUE.format(
+        queue_frequency_minutes=frequency.Queue().minutes,
+        user_id=tag_name,
+        started_queue_number=queue_number))
 
     await my_message.add_reaction('🍻')
     await my_message.add_reaction('❌')
