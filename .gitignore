@@ -2,5 +2,5 @@ __pycache__/
 /venv/**
 /password.py
 /.idea/**
-/for_fun.py
+/for_fun/for_fun.py
 /.vscode/**

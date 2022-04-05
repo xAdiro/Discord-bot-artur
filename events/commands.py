@@ -1,7 +1,9 @@
 import asyncio
+
 from discord import message as discord_message
-import speaking as speak
-import custom_time as time
+
+from events.speaking import speaking as speak
+from utilities import custom_time as time
 from events.timings import Queue as QueueFreq
 
 
@@ -49,7 +51,7 @@ class Command:
         self.previous_message = new_message
 
     async def finish(self):
-        await self.previous_message.delete()
+        if self.previous_message is not None: await self.previous_message.delete()
         await speak.farewell(self.channel, self.queue_number, self.time_started)
         self.queue_number = 1
 

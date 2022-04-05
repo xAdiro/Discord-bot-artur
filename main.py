@@ -1,4 +1,5 @@
 import discord
+
 from password import TOKEN
 from events.events import Events
 

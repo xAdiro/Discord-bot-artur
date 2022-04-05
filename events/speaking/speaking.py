@@ -1,6 +1,7 @@
-import spoken_lines as lines
 import discord
-import custom_time as time
+
+from events.speaking import spoken_lines as lines
+from utilities import custom_time as time
 from events.timings import Queue as QueueFreq
 
 
@@ -33,7 +34,6 @@ async def new_queue(channel: discord.channel, queue_number: int, queue_freq: Que
         queue_frequency_minutes=queue_freq.minutes,
         user_id=tag_name,
         started_queue_number=queue_number))
-
     await my_message.add_reaction('🍻')
     await my_message.add_reaction('❌')
     return my_message

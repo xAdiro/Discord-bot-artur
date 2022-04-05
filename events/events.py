@@ -1,5 +1,8 @@
+import asyncio
+
 import discord
-from commands import *
+
+from events.commands import Command
 from events.timings import Timeout
 
 
