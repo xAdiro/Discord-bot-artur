@@ -18,7 +18,7 @@ class Command:
 
     async def start(self, msg: discord_message, started=False):
         if not started:
-            self.previous_message = await speak.greeting(msg, msg.author.id)
+            self.previous_message = await speak.greeting(msg, msg.author.id, self.queue_freq)
             self.channel = msg.channel
             self.game_master = msg.author
             self.time_started = time.date_time()

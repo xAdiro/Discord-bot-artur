@@ -21,9 +21,13 @@ async def already_started(message: discord.message) -> discord.message:
     return my_message
 
 
-async def greeting(message: discord.message, tag_name: str) -> discord.message:
+async def greeting(message: discord.message, tag_name: str, queue_freq: QueueFreq) -> discord.message:
     await message.add_reaction('👌')
-    my_message = await message.channel.send(lines.GREETING.format(user_id=tag_name))
+    my_message = await message.channel.send(
+        lines.GREETING.format(
+            user_id=tag_name,
+            queue_frequency_minutes=queue_freq.minutes)
+    )
     await my_message.add_reaction('✅')
     await my_message.add_reaction('❌')
     return my_message
