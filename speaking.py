@@ -9,7 +9,7 @@ async def farewell(channel: discord.channel, queues_total: int, finishing_time: 
         await channel.send(lines.FAREWELL_NO_QUEUES)
     else:
         await channel.send(lines.FAREWELL.format(
-            finishing_time=time.full(),
+            finishing_time=time.date_time(),
             queues_total=queues_total-1,
             beginning_time=finishing_time))
 

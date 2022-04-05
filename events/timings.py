@@ -1,4 +1,4 @@
-QUEUE_TIME_SECONDS = 900
+QUEUE_TIME_SECONDS = 900  # 15 minutes = 900 seconds
 
 
 class Timeout(object):
