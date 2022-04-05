@@ -6,7 +6,7 @@ from commands import *
 class Events:
     def __init__(self, client: discord.client.Client) -> None:
         self.client = client
-        self.command = None
+        self.command = Command()
         self.started = False
 
         @self.client.event
@@ -15,21 +15,13 @@ class Events:
 
         @client.event
         async def on_message(msg: discord.message) -> None:
-            if msg.author == self.client.user:
-                return
+            if msg.author == self.client.user: return
 
             if msg.content.lower().startswith("pijemy"):
-                if self.started:
-                    await self.command.run(Commands.ALREADY_STARTED, msg)
-                else:
-                    self.started = True
-                    self.command = Command(msg)
-                    await self.command.run(Commands.START, msg)
-                    await wait_for_reaction(msg)
-                return
-
-            # if msg.author != self.game_master: return  # ignore commands not from game master
-            self.command.run(msg)
+                await self.command.start(msg, self.started)
+                if not self.started: await wait_for_reaction(msg)
+            else:
+                await self.command.run(msg)
 
         async def wait_for_reaction(msg: discord.message):
             def check(reaction, user) -> bool:
@@ -39,15 +31,15 @@ class Events:
                 reaction, user = await self.client.wait_for("reaction_add", check=check,
                                                             timeout=frequency.Timeout().seconds)  # 2 hours
             except asyncio.TimeoutError:
-                await self.command.run(Commands.FINISH)
+                await self.command.finish()
                 return ""
 
             emoji = str(reaction.emoji)
             if emoji == "✅":
-                await self.command.run(Commands.START_NEW_QUEUE, None)
+                await self.command.start_new_queue()
             elif emoji == "❌":
-                await self.command.run(Commands.FINISH, None)
+                await self.command.finish()
             elif emoji == "🍻":
-                await self.command.run(Commands.DRINK_QUEUE, None)
-                await self.command.run(Commands.START_NEW_QUEUE, None)
+                await self.command.drink_queue()
+                await self.command.start_new_queue()
             await wait_for_reaction(self.command.previous_message)
