@@ -1,12 +1,11 @@
 import discord
 from password import TOKEN
-import events.events as ev
+from events.events import Events
 
 
 def main():
     client = discord.Client()
-
-    ev.Events(client)
+    Events(client)
     client.run(TOKEN)
 
 

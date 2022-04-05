@@ -1,6 +1,6 @@
-import asyncio
 import discord
 from commands import *
+from events.timings import Timeout
 
 
 class Events:
@@ -28,11 +28,14 @@ class Events:
                 return user == self.command.game_master and str(reaction.emoji) in "✅🍻❌"
 
             try:
-                reaction, user = await self.client.wait_for("reaction_add", check=check,
-                                                            timeout=frequency.Timeout().seconds)  # 2 hours
+                reaction, user = await self.client.wait_for(
+                    "reaction_add",
+                    check=check,
+                    timeout=Timeout.seconds()
+                )
             except asyncio.TimeoutError:
                 await self.command.finish()
-                return ""
+                return
 
             emoji = str(reaction.emoji)
             if emoji == "✅":

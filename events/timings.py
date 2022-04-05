@@ -1,43 +1,35 @@
-QUEUE_TIME_SECONDS = 900  # 15 minutes = 900 seconds
-
-
 class Timeout(object):
-    __TIMEOUT_TIME_SECONDS = 7200  # 2 hours = 7200 seconds
+    __SECONDS = 7200  # 2 hours = 7200 seconds
 
-    @property
-    def miliseconds(self) -> int:
-        return int(self.__TIMEOUT_TIME_SECONDS*1000)
+    @staticmethod
+    def miliseconds() -> int:
+        return int(Timeout.__SECONDS*1000)
 
-    @property
-    def seconds(self) -> int:
-        return self.__TIMEOUT_TIME_SECONDS
+    @staticmethod
+    def seconds() -> int:
+        return Timeout.__SECONDS
 
-    @property
-    def minutes(self) -> int:
-        return int(self.__TIMEOUT_TIME_SECONDS/60)
+    @staticmethod
+    def minutes() -> int:
+        return int(Timeout.__SECONDS/60)
 
-    @property
-    def hours(self) -> int:
-        return int(self.__TIMEOUT_TIME_SECONDS/3600)
+    @staticmethod
+    def hours() -> int:
+        return int(Timeout.__SECONDS/3600)
 
 
 class Queue(object):
-    def __init__(self, time_seconds=5):
-        #  QUEUE_TIME_SECONDS = time_seconds
-        pass
+    def __init__(self, time_seconds=900):  # 15 minutes = 900 seconds
+        self.seconds = time_seconds
 
     @property
     def miliseconds(self) -> int:
-        return int(QUEUE_TIME_SECONDS*1000)
-
-    @property
-    def seconds(self) -> int:
-        return QUEUE_TIME_SECONDS
+        return int(self.seconds*1000)
 
     @property
     def minutes(self) -> int:
-        return int(QUEUE_TIME_SECONDS/60)
+        return int(self.seconds/60)
 
     @property
     def hours(self) -> int:
-        return int(QUEUE_TIME_SECONDS/3600)
+        return int(self.seconds/3600)
