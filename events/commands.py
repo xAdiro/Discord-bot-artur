@@ -34,6 +34,8 @@ class Command:
                 self.__add_queue(content)
             elif content.startswith('$czas_kolejki('):
                 self.__set_queue_freq(content)
+            else:
+                return
         except ValueError:
             Command.__add_error_reaction(msg)
         else:
