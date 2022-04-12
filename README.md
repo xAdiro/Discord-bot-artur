@@ -1,5 +1,5 @@
 # Bot Artur
-Artur is a discord party bot which task is to notify everyone regularly when there is a time for to drink their favourite liquor. The project started as a joke but is now fully functional and I personally host it on one of my raspberry pis for private usage. Because of its origin it's only good to use at one server at a time(per account) as it wasn't anticipated for it to be used globally.
+Artur is a discord party bot which task is to notify everyone regularly when there is a time for to drink their favourite bevarage. The project started as a joke but is now fully functional and I personally host it on one of my raspberry pis for private usage. Because of its origin it's only good to use at one server at a time(per account) as it wasn't anticipated for it to be used globally.
 
 ## Technologies used:
 - Python 3
