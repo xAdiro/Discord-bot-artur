@@ -18,4 +18,10 @@ Also you need to install discord api with:
 ```bash
 pip install discord
 ```
-After that you should be able to run `main.py` succesfully.
+After that you should be able to run `main.py` succesfully, after which you can start drinking event by typing `pijemy` (it's not case sensitive) 
+
+## Default values and changing them
+By default there is 15 minute interval set between each queue taken and 2 hours inactivity time before bot ends event. These can be changed in code in `/events/timings.py/` but queue interval can be also changed with command
+### Commands
+- $czas_kolejki(`time`) - which changes queue interval to `time` expressed in seconds
+- $dodaj(`queues`) - adds `queues` number to current number of them
